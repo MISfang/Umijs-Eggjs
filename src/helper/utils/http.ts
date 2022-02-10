@@ -11,13 +11,21 @@ const Http = async ({
 }: IUseHttpHook) => {
   setLoading && setLoading(true);
   return new Promise((resolve, reject) => {
+    const token = localStorage.getItem('username');
+    let defaultDheader = {
+      'Content-type': 'application/json',
+    };
+    defaultDheader = token
+      ? {
+          ...defaultDheader,
+          //@ts-ignore
+          token,
+        }
+      : defaultDheader;
     Faxios({
       url,
       method,
-      headers: {
-        'Content-type': 'application/json',
-        ...headers,
-      },
+      headers: defaultDheader,
       data,
     })
       //  @ts-ignore: Unreachable code error

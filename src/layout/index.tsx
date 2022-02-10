@@ -3,7 +3,6 @@ import { FC } from 'react';
 import { MenuBar } from '@/components';
 import { StoreProvider } from 'think-react-store';
 import { useLocation } from 'umi';
-import './index.less';
 import '@/styles/stylesheet.css';
 
 const Order: FC = ({ children }) => {

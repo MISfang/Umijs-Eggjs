@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useState, memo } from 'react';
 import { Picker, List, Calendar, Button, Toast, Icon } from 'antd-mobile';
 import { FormatTime, handleStr } from '@/helper/dayjs';
 import { BiSearchAlt } from 'react-icons/bi';
@@ -87,4 +87,10 @@ const index: FC<{ citys: ICitysData; citysLoading: boolean }> = ({
   );
 };
 
-export default index;
+export default memo(index, (pre, next) => {
+  if (pre.citys === next.citys && pre.citysLoading === next.citysLoading) {
+    return true;
+  } else {
+    return false;
+  }
+});

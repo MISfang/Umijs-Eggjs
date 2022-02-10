@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useState, memo } from 'react';
 import { IHouseData } from '@/types';
 import { history } from 'umi';
 
@@ -26,4 +26,4 @@ const index: FC<{ houses: IHouseData }> = ({ houses }) => {
   );
 };
 
-export default index;
+export default memo(index);

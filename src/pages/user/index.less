@@ -1,0 +1,85 @@
+@import '../../helper/mixin.less';
+
+.user-page {
+  .info {
+    position: relative;
+    margin-bottom: 20px;
+    padding: 20px;
+    background: #8a2be2;
+    box-sizing: border-box;
+
+    .set {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      color: #fff;
+      background-color: #108ee9;
+      padding: 5px 8px;
+      border-radius: 20px;
+      z-index: 10;
+    }
+
+    .user {
+      .flex(column, center);
+      color: #fff;
+
+      img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        border: 1px solid #fff;
+      }
+
+      .tel {
+        margin: 5px;
+        padding: 0px 10px;
+        border-radius: 6px;
+        background: rgba(255, 255, 255, 0.5);
+        color: rgba(0, 0, 0, 0.7);
+        font-size: 14px;
+      }
+
+      .sign {
+        background-image: linear-gradient(120deg, #ec008c, #fc6767 100%);
+        background-repeat: no-repeat;
+        background-size: 100% 0.2em;
+        background-position: 0 80%;
+        transition: background-size 0.25s ease-in;
+      }
+      .sign:hover {
+        background-size: 100% 88% !important;
+      }
+    }
+  }
+
+  .cells {
+    .am-list {
+      margin-bottom: 30px;
+    }
+  }
+}
+
+.user-edit {
+  .picker {
+    background-color: blueviolet;
+  }
+
+  .am-image-picker-item {
+    border-radius: 10px !important;
+  }
+
+  .btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    .mybtn {
+      width: 30%;
+      height: 40px;
+      line-height: 40px;
+      margin: 20px 6px;
+      border-radius: 60px;
+    }
+  }
+}
