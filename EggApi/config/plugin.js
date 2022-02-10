@@ -6,4 +6,16 @@ module.exports = {
   // static: {
   //   enable: true,
   // }
+  sequelize: {
+    enable: true,
+    package: 'egg-sequelize',
+  },
+  mysql: {
+    enable: true,
+    package: 'egg-mysql',
+  },
+  jwt: {
+    enable: true,
+    package: 'egg-jwt',
+  },
 };

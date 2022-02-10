@@ -3,7 +3,10 @@
 /**
  * @param {Egg.Application} app - egg application
  */
-module.exports = app => {
+module.exports = (app) => {
   const { router, controller } = app;
-  router.get('/', controller.home.index);
+  const { get, post } = router;
+  post('/api/user/register', controller.user.register);
+  post('/api/user/login', controller.user.login);
+  post('/api/user/detail', controller.user.detail);
 };
