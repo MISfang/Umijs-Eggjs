@@ -38,11 +38,6 @@ const index: FC = () => {
     },
     watch: [page.pageNum, houseSubmit],
   });
-  console.log(
-    '%c 🥨 houses: ',
-    'font-size:20px;background-color: #33A5FF;color:#fff;',
-    houses,
-  );
 
   useObserverHook(
     `#${commonEnums.LOADING_ID}`,
@@ -102,7 +97,7 @@ const index: FC = () => {
 
       {/* 搜索内容页面 */}
       {!houseLists.length ? (
-        <Loading isBig={true}></Loading>
+        <Loading isBig={true} showLoading={showloading}></Loading>
       ) : (
         <div className="result">
           {houseLists.map(({ imgs, id, info, price }: IHouse) => (
