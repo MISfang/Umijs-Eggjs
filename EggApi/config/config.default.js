@@ -17,10 +17,25 @@ module.exports = (appInfo) => {
 
   // add your middleware config here
   config.middleware = [];
+  config.session = {
+    key: 'Fang',
+    httpOnly: true,
+    maxAge: 1000 * 60,
+    renew: true,
+  };
+
   config.security = {
     csrf: {
       enable: false,
     },
+    domainWhiteList: ['*'],
+  };
+  config.cors = {
+    origin: '*',
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
+  };
+  config.auth = {
+    exclude: ['/api/user/login', '/api/user/register'],
   };
 
   config.mysql = {
@@ -32,6 +47,14 @@ module.exports = (appInfo) => {
       user: 'root',
       password: 'understandme520',
       database: 'egg-ts',
+    },
+  };
+  config.redis = {
+    client: {
+      host: '127.0.0.1',
+      port: '6379',
+      password: '',
+      db: 0,
     },
   };
 
@@ -54,6 +77,7 @@ module.exports = (appInfo) => {
   const userConfig = {
     // myAppName: 'egg',
     salt: 'Fang',
+    redisExpire: 60 * 60 * 24,
   };
 
   return {

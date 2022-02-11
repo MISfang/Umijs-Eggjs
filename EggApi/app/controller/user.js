@@ -1,26 +1,38 @@
 'use strict';
 
 const md5 = require('md5');
+const BaseController = require('./base');
 const Controller = require('egg').Controller;
 
-class UserController extends Controller {
+class UserController extends BaseController {
   // 辅助方法
   async signToken(username) {
     const { ctx, app } = this;
-    ctx.session[username] = 1;
-    return app.jwt.sign({ username }, app.config.jwt.secret);
+    const token = app.jwt.sign(
+      {
+        username,
+      },
+      app.config.jwt.secret,
+    );
+    await app.redis.set(username, token, 'EX', app.config.redisExpire);
+    return token;
   }
+  // 处理返回结果的公共抽离函数
+  parseResult(ctx, res) {
+    return {
+      ...ctx.helper.unPick(res.dataValues, ['password']),
+      createTime: ctx.helper.timestamp(res.createTime),
+    };
+  }
+  // 辅助方法结束
 
   async register() {
     const { ctx, app } = this;
-    const { username, password } = ctx.request.body;
+    const { username, password } = ctx.params();
     const getUserRes = await ctx.service.user.getUser(username);
 
     if (getUserRes) {
-      ctx.body = {
-        status: 500,
-        errMsg: '该用户已经注册过！',
-      };
+      this.error('该用户已经注册过！');
       return;
     }
 
@@ -31,62 +43,56 @@ class UserController extends Controller {
     });
     if (res) {
       const token = await this.signToken(username);
-      ctx.body = {
-        status: 200,
-        Msg: '注册成功！',
-        data: {
-          ...ctx.helper.unPick(res.dataValues, ['password']),
-          createTime: ctx.helper.timestamp(res.createTime),
+      this.sucess(
+        {
+          ...this.parseResult(ctx, res),
+          token,
         },
-        token,
-      };
+        '注册成功！',
+      );
     } else {
-      ctx.body = {
-        status: 500,
-        errMsg: '注册失败！',
-      };
+      this.error('注册失败！');
     }
   }
 
   async login() {
     const { ctx } = this;
-    const { username, password } = ctx.request.body;
+    const { username, password } = ctx.params();
     const res = await ctx.service.user.getUser(username, password);
     if (res) {
       const token = await this.signToken(username);
-      ctx.body = {
-        status: 200,
-        Msg: '登录成功',
-        data: {
-          ...ctx.helper.unPick(res.dataValues, ['password']),
-          createTime: ctx.helper.timestamp(res.createTime),
+      this.sucess(
+        {
+          ...this.parseResult(ctx, res),
+          token,
         },
-        token,
-      };
+        '登录成功',
+      );
     } else {
-      ctx.body = {
-        status: 500,
-        errMsg: '该用户不存在，请先注册！',
-      };
+      this.error('该用户不存在，请先注册！');
     }
   }
+
   async detail() {
     const { ctx } = this;
     const user = await ctx.service.user.getUser(ctx.username);
 
     if (user) {
-      ctx.body = {
-        status: 200,
-        data: {
-          ...ctx.helper.unPick(user.dataValues, ['password']),
-          createTime: ctx.helper.timestamp(user.createTime),
-        },
-      };
+      this.sucess({
+        ...this.parseResult(ctx, res),
+      });
     } else {
-      ctx.body = {
-        status: 500,
-        errMsg: '该用户不存在',
-      };
+      this.error('该用户不存在');
+    }
+  }
+
+  async logout() {
+    const { ctx, app } = this;
+    try {
+      // await app.redis.del(ctx.username);
+      this.sucess('OK', '退出登录成功');
+    } catch (error) {
+      this.error('退出登录失败');
     }
   }
 }
