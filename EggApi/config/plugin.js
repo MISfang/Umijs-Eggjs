@@ -7,10 +7,6 @@ module.exports = {
     enable: true,
     package: 'egg-sequelize',
   },
-  mysql: {
-    enable: true,
-    package: 'egg-mysql',
-  },
   jwt: {
     enable: true,
     package: 'egg-jwt',
@@ -22,6 +18,10 @@ module.exports = {
   auth: {
     enable: true,
     path: path.join(__dirname, '../lib/plugin/egg-auth'),
+  },
+  notFound: {
+    enable: true,
+    path: path.join(__dirname, '../lib/plugin/egg-notFound'),
   },
   redis: {
     enable: true,

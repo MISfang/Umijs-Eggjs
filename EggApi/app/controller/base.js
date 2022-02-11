@@ -1,7 +1,7 @@
 const Controller = require('egg').Controller;
 
 class BaseController extends Controller {
-  sucess(data = {}, Msg) {
+  success(data = {}, Msg) {
     const { ctx } = this;
     if (Msg) {
       ctx.body = {

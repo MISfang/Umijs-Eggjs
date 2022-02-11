@@ -38,17 +38,17 @@ module.exports = (appInfo) => {
     exclude: ['/api/user/login', '/api/user/register'],
   };
 
-  config.mysql = {
-    app: true,
-    agent: false,
-    client: {
-      host: '127.0.0.1',
-      port: '3306',
-      user: 'root',
-      password: 'understandme520',
-      database: 'egg-ts',
-    },
-  };
+  // config.mysql = {
+  //   app: true,
+  //   agent: false,
+  //   client: {
+  //     host: '127.0.0.1',
+  //     port: '3306',
+  //     user: 'root',
+  //     password: 'understandme520',
+  //     database: 'egg_ts',
+  //   },
+  // };
   config.redis = {
     client: {
       host: '127.0.0.1',
@@ -64,7 +64,7 @@ module.exports = (appInfo) => {
     port: '3306',
     user: 'root',
     password: 'understandme520',
-    database: 'egg-ts',
+    database: 'egg_ts',
     define: {
       timestamps: false,
       freezeTableName: true,

@@ -2,7 +2,6 @@
 
 const md5 = require('md5');
 const BaseController = require('./base');
-const Controller = require('egg').Controller;
 
 class UserController extends BaseController {
   // 辅助方法
@@ -43,7 +42,7 @@ class UserController extends BaseController {
     });
     if (res) {
       const token = await this.signToken(username);
-      this.sucess(
+      this.success(
         {
           ...this.parseResult(ctx, res),
           token,
@@ -61,7 +60,7 @@ class UserController extends BaseController {
     const res = await ctx.service.user.getUser(username, password);
     if (res) {
       const token = await this.signToken(username);
-      this.sucess(
+      this.success(
         {
           ...this.parseResult(ctx, res),
           token,
@@ -78,7 +77,7 @@ class UserController extends BaseController {
     const user = await ctx.service.user.getUser(ctx.username);
 
     if (user) {
-      this.sucess({
+      this.success({
         ...this.parseResult(ctx, res),
       });
     } else {
@@ -89,11 +88,20 @@ class UserController extends BaseController {
   async logout() {
     const { ctx, app } = this;
     try {
-      // await app.redis.del(ctx.username);
-      this.sucess('OK', '退出登录成功');
+      await app.redis.del(ctx.username);
+      this.success('OK', '退出登录成功');
     } catch (error) {
       this.error('退出登录失败');
     }
+  }
+  async edit() {
+    const { ctx, app } = this;
+    const res = ctx.service.user.edit({
+      ...ctx.params(),
+      updateTime: ctx.helper.time(),
+    });
+
+    this.success(res);
   }
 }
 

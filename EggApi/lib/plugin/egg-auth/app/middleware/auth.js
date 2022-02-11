@@ -4,7 +4,6 @@ module.exports = (options) => {
     const clientToken = ctx.request.token;
     const redisToken = await ctx.app.redis.get(ctx.username);
     const flag = redisToken ? redisToken === clientToken : redisToken;
-
     if (!flag && !options.exclude.includes(url.split('?')[0])) {
       ctx.body = {
         status: 1001,

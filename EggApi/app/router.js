@@ -11,4 +11,9 @@ module.exports = (app) => {
   post('/api/user/login', controller.user.login);
   post('/api/user/detail', userExits, controller.user.detail);
   post('/api/user/logout', controller.user.logout);
+
+  post('/api/commons/citys', controller.common.citys);
+
+  post('/api/house/hot', controller.house.hot);
+  post('/api/house/search', controller.house.search);
 };
