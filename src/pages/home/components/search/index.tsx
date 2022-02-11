@@ -14,7 +14,9 @@ const index: FC<{ citys: ICitysData; citysLoading: boolean }> = ({
   const [calendarVisiable, setCalendarVisiable] = useState<boolean>(false);
 
   // 方法区
-  const handleCityChange = (value: any) => {};
+  const handleCityChange = (value: any) => {
+    setSelectedCity(value);
+  };
 
   const handleDateOnconfirm = (
     startTime: Date | undefined,

@@ -1,15 +1,15 @@
 import { ImagePicker, List, Toast, InputItem, Button } from 'antd-mobile';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { history } from 'umi';
 import { createForm } from 'rc-form';
 import { useStoreHook } from 'think-react-store';
 const index = (props) => {
-  const [files, setFiles] = useState([]);
   const { getFieldProps, validateFields } = props.form;
   const {
-    user: { editUserAsync },
+    user: { editUserAsync, getUserAsync, avatar, phone, sign },
   } = useStoreHook();
 
+  const [files, setFiles] = useState([{ url: avatar }]);
   const handleSubmit = () => {
     if (!files.length) {
       Toast.fail('请先上传文件');
@@ -25,12 +25,15 @@ const index = (props) => {
         return;
       }
       editUserAsync({
-        img: files[0].url,
-        tel: value.tel,
+        avatar: files[0].url,
+        phone: value.tel,
         sign: value.sign,
       });
     });
   };
+  useEffect(() => {
+    getUserAsync({});
+  }, []);
 
   return (
     <>
@@ -55,7 +58,7 @@ const index = (props) => {
               placeholder="电话"
               {...getFieldProps('tel', {
                 rules: [{ required: true }],
-                initialValue: '123456',
+                initialValue: phone,
               })}
             >
               电话:
@@ -66,7 +69,7 @@ const index = (props) => {
               placeholder="用户签名"
               {...getFieldProps('sign', {
                 rules: [{ required: true }],
-                initialValue: '该用户什么也没写',
+                initialValue: sign ? sign : '该用户什么也没写',
               })}
             >
               签名:

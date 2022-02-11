@@ -4,28 +4,26 @@ import { Toast } from 'antd-mobile';
 const Http = async ({
   url,
   method = 'post',
-  headers = {},
   data = {},
   setLoading,
   setResData,
 }: IUseHttpHook) => {
   setLoading && setLoading(true);
   return new Promise((resolve, reject) => {
-    const token = localStorage.getItem('username');
-    let defaultDheader = {
+    const token = localStorage.getItem('token');
+    let defaultHeader: any = {
       'Content-type': 'application/json',
     };
-    defaultDheader = token
+    defaultHeader = token
       ? {
-          ...defaultDheader,
-          //@ts-ignore
+          ...defaultHeader,
           token,
         }
-      : defaultDheader;
+      : defaultHeader;
     Faxios({
       url,
       method,
-      headers: defaultDheader,
+      headers: defaultHeader,
       data,
     })
       //  @ts-ignore: Unreachable code error
@@ -34,6 +32,11 @@ const Http = async ({
           resolve(data);
           setResData && setResData(data);
         } else {
+          if (status === 1001) {
+            Toast.fail('用户未登录，请去登录！');
+            location.href = '/login?from' + location.pathname;
+            localStorage.clear();
+          }
           Toast.fail(errMsg);
           reject(errMsg);
         }

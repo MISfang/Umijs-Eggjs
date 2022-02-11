@@ -8,7 +8,7 @@ export default {
     id: undefined,
     username: undefined,
     avatar: undefined,
-    tel: undefined,
+    phone: undefined,
     sign: undefined,
   },
   reducers: {
@@ -80,6 +80,16 @@ export default {
         localStorage.setItem('username', data.username);
         urlGet('from') && history.push(urlGet('from')!);
       }
+    },
+    async logoutAsync(dispatch: Function, rootState: any, payload: any) {
+      await Http({
+        url: '/user/logout',
+        data: payload,
+      });
+
+      Toast.success('退出登录成功！');
+      localStorage.clear();
+      location.href = `/login?from=${location.pathname}`;
     },
   },
 };

@@ -10,6 +10,14 @@ import { commonEnums } from '@/enums';
 
 const index: FC = () => {
   const { cityID, startTime, endTime } = handleQuery(useLocation().search);
+  console.log(
+    '%c 🍎 cityID, startTime, endTime: ',
+    'font-size:20px;background-color: #E41A6A;color:#fff;',
+    cityID,
+    startTime,
+    endTime,
+  );
+
   const [houseName, setHouseName] = useState('');
   const [houseLists, setHouseLists] = useState<IHouse[]>([]);
 
@@ -17,7 +25,6 @@ const index: FC = () => {
     commonEnums.PAGE,
   );
   const [showloading, setShowloading] = useState(true);
-
   const [houseSubmit, setHouseSubmit] = useState('');
 
   const [houses, loading] = useHttpHook({
@@ -31,6 +38,12 @@ const index: FC = () => {
     },
     watch: [page.pageNum, houseSubmit],
   });
+  console.log(
+    '%c 🥨 houses: ',
+    'font-size:20px;background-color: #33A5FF;color:#fff;',
+    houses,
+  );
+
   useObserverHook(
     `#${commonEnums.LOADING_ID}`,
     (entres: IntersectionObserverEntry[]) => {
@@ -86,21 +99,22 @@ const index: FC = () => {
         onCancel={onCancel}
         onSubmit={onSubmit}
       ></SearchBar>
+
       {/* 搜索内容页面 */}
       {!houseLists.length ? (
         <Loading isBig={true}></Loading>
       ) : (
         <div className="result">
-          {houseLists.map(({ img, id, title, price }: IHouse) => (
+          {houseLists.map(({ imgs, id, info, price }: IHouse) => (
             <div className="item" key={id}>
               <img
                 src={require('../../assets/blank.png')}
                 className="img"
                 alt=""
-                data-src={img}
+                data-src={imgs[0]?.url}
               />
               <div className="item-right">
-                <div className="title">{title}</div>
+                <div className="title">{info}</div>
                 <div className="price">{price}</div>
               </div>
             </div>

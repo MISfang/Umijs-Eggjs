@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 
 const FormatTime = (time: Date | number): string =>
-  dayjs(time).format('YYYY年MM月DD日');
+  dayjs(time).format('YYYY-MM-DD');
 
 const handleStr = (str1: string, str2: string, num: number): string[] => {
   const leftStr = str1.slice(0, num);

@@ -9,6 +9,7 @@ const Home: FC = () => {
   const [citys, citysLoading] = useHttpHook({
     url: '/commons/citys',
   });
+
   const [houses, housesLoading] = useHttpHook({
     url: '/house/hot',
   });
@@ -18,11 +19,9 @@ const Home: FC = () => {
       {/* 登录区域 */}
       <Header></Header>
       {/* 搜索区域 */}
-      {/* @ts-ignore: Unreachable code error */}
-      <Search citys={citys} citysLoading={citysLoading}></Search>
+      {citys && <Search citys={citys} citysLoading={citysLoading}></Search>}
       {/* 热门民宿 */}
-      {/* @ts-ignore: Unreachable code error */}
-      <Hot houses={houses} housesLoading={housesLoading}></Hot>
+      {houses && <Hot houses={houses} housesLoading={housesLoading}></Hot>}
     </div>
   );
 };

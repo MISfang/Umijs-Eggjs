@@ -1,11 +1,11 @@
-import { List } from 'antd-mobile';
+import { List, Button } from 'antd-mobile';
 import { FC, useState, useEffect } from 'react';
 import { history } from 'umi';
 import './index.less';
 import { useStoreHook } from 'think-react-store';
 const User: FC = () => {
   const {
-    user: { username, avatar, sign, tel, getUserAsync },
+    user: { username, avatar, sign, phone, getUserAsync, logoutAsync },
   } = useStoreHook();
 
   useEffect(() => {
@@ -34,7 +34,7 @@ const User: FC = () => {
         <div className="user">
           <img src={avatar} alt="" className="img" />
           <div className="tel">昵称:{username}</div>
-          <div className="tel">电话:{tel}</div>
+          <div className="tel">电话:{phone}</div>
           <div className="sign">{sign}</div>
         </div>
       </div>
@@ -46,6 +46,10 @@ const User: FC = () => {
           <List.Item arrow="horizontal">联系客服</List.Item>
         </List>
       </div>
+
+      <Button type="warning" onClick={logoutAsync}>
+        退出登录
+      </Button>
     </div>
   );
 };

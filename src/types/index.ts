@@ -22,7 +22,12 @@ interface ICitysData {
 
 interface IHouse {
   id: number;
-  img: string;
+  imgs: {
+    id: number;
+    url: string;
+    houseId: number;
+    createTime: string;
+  }[];
   title: string;
   info: string;
   price: string;
