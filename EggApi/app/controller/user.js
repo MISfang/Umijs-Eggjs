@@ -5,14 +5,9 @@ const BaseController = require('./base');
 
 class UserController extends BaseController {
   // 辅助方法
-  async signToken(username) {
-    const { ctx, app } = this;
-    const token = app.jwt.sign(
-      {
-        username,
-      },
-      app.config.jwt.secret,
-    );
+  async signToken({ username, id }) {
+    const { app } = this;
+    const token = app.jwt.sign({ id, username }, app.config.jwt.secret);
     await app.redis.set(username, token, 'EX', app.config.redisExpire);
     return token;
   }
@@ -41,7 +36,8 @@ class UserController extends BaseController {
       createTime: ctx.helper.time(),
     });
     if (res) {
-      const token = await this.signToken(username);
+      const { id } = res;
+      const token = await this.signToken({ id, username });
       this.success(
         {
           ...this.parseResult(ctx, res),
@@ -59,7 +55,8 @@ class UserController extends BaseController {
     const { username, password } = ctx.params();
     const res = await ctx.service.user.getUser(username, password);
     if (res) {
-      const token = await this.signToken(username);
+      const { id } = res;
+      const token = await this.signToken({ id, username });
       this.success(
         {
           ...this.parseResult(ctx, res),
@@ -74,9 +71,9 @@ class UserController extends BaseController {
 
   async detail() {
     const { ctx } = this;
-    const user = await ctx.service.user.getUser(ctx.username);
+    const res = await ctx.service.user.getUser(ctx.username);
 
-    if (user) {
+    if (res) {
       this.success({
         ...this.parseResult(ctx, res),
       });
@@ -94,13 +91,13 @@ class UserController extends BaseController {
       this.error('退出登录失败');
     }
   }
+
   async edit() {
-    const { ctx, app } = this;
+    const { ctx } = this;
     const res = ctx.service.user.edit({
       ...ctx.params(),
       updateTime: ctx.helper.time(),
     });
-
     this.success(res);
   }
 }

@@ -6,15 +6,25 @@ class HouseController extends BaseController {
     const res = await ctx.service.house.hot();
     this.success(res, '热门民宿获取成功');
   }
+
   async search() {
     const { ctx } = this;
     const res = await ctx.service.house.search(ctx.params());
-    console.log(
-      '%c 🦐 res: ',
-      'font-size:20px;background-color: #6EC1C2;color:#fff;',
-      res,
-    );
+
     this.success(res, '热门民宿获取成功');
+  }
+
+  async detail() {
+    const { ctx } = this;
+
+    const res = await ctx.service.house.detail(ctx.params('id'));
+    this.success(
+      {
+        info: res,
+        banner: res.imgs,
+      },
+      '民宿详情信息获取成功',
+    );
   }
 }
 

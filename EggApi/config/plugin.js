@@ -27,4 +27,8 @@ module.exports = {
     enable: true,
     package: 'egg-redis',
   },
+  interfaceCache: {
+    enable: true,
+    path: path.join(__dirname, '../lib/plugin/egg-interfaceCache'),
+  },
 };

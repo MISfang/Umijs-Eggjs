@@ -35,20 +35,19 @@ module.exports = (appInfo) => {
     allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
   };
   config.auth = {
-    exclude: ['/api/user/login', '/api/user/register'],
+    exclude: [
+      '/api/user/login',
+      '/api/user/register',
+      '/api/commons/citys',
+      '/api/house/hot',
+      '/api/house/search',
+    ],
+  };
+  config.interfaceCache = {
+    expire: 10,
+    // include: ['/api/user/detail'],
   };
 
-  // config.mysql = {
-  //   app: true,
-  //   agent: false,
-  //   client: {
-  //     host: '127.0.0.1',
-  //     port: '3306',
-  //     user: 'root',
-  //     password: 'understandme520',
-  //     database: 'egg_ts',
-  //   },
-  // };
   config.redis = {
     client: {
       host: '127.0.0.1',
