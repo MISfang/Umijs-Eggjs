@@ -2,21 +2,14 @@ import handleQuery from '@/helper/query';
 import { FC, useEffect, useState } from 'react';
 import { IHouse } from '@/types';
 import { Loading } from '@/components';
-import { SearchBar } from 'antd-mobile';
+import { SearchBar, NavBar, Icon } from 'antd-mobile';
 import { useHttpHook, useImageHook, useObserverHook } from '@/hooks';
-import { useLocation } from 'umi';
+import { history, useLocation } from 'umi';
 import './index.less';
 import { commonEnums } from '@/enums';
 
 const index: FC = () => {
   const { cityID, startTime, endTime } = handleQuery(useLocation().search);
-  console.log(
-    '%c 🍎 cityID, startTime, endTime: ',
-    'font-size:20px;background-color: #E41A6A;color:#fff;',
-    cityID,
-    startTime,
-    endTime,
-  );
 
   const [houseName, setHouseName] = useState('');
   const [houseLists, setHouseLists] = useState<IHouse[]>([]);
@@ -42,7 +35,7 @@ const index: FC = () => {
   useObserverHook(
     `#${commonEnums.LOADING_ID}`,
     (entres: IntersectionObserverEntry[]) => {
-      if (!loading && entres[0].isIntersecting) {
+      if (showloading && entres[0].isIntersecting) {
         setPage({
           ...page,
           pageNum: page.pageNum + 1,
@@ -55,9 +48,9 @@ const index: FC = () => {
   useEffect(() => {
     if (!loading && houses) {
       const { data } = houses;
-      if (data.length) {
+      if (data.length !== 0) {
         setHouseLists([...houseLists, ...data]);
-        if (houses.length < page.limit) {
+        if (data.length < page.limit) {
           setShowloading(false);
         }
       } else {
@@ -93,15 +86,27 @@ const index: FC = () => {
         onChange={(val) => setHouseName(val)}
         onCancel={onCancel}
         onSubmit={onSubmit}
+        className="searchBar"
       ></SearchBar>
 
       {/* 搜索内容页面 */}
       {!houseLists.length ? (
-        <Loading isBig={true} showLoading={showloading}></Loading>
+        <Loading isBig={true} showLoading={showloading}>
+          搜索无结果
+        </Loading>
       ) : (
         <div className="result">
-          {houseLists.map(({ imgs, id, info, price }: IHouse) => (
-            <div className="item" key={id}>
+          {houseLists.map(({ imgs, id, info, price, name }: IHouse) => (
+            <div
+              className="item"
+              key={id}
+              onClick={() => {
+                history.push({
+                  pathname: '/house',
+                  query: { id: id.toString() },
+                });
+              }}
+            >
               <img
                 src={require('../../assets/blank.png')}
                 className="img"
@@ -109,7 +114,8 @@ const index: FC = () => {
                 data-src={imgs[0]?.url}
               />
               <div className="item-right">
-                <div className="title">{info}</div>
+                <div className="title">{name}</div>
+                <div className="title2">{info}</div>
                 <div className="price">{price}</div>
               </div>
             </div>
@@ -120,6 +126,14 @@ const index: FC = () => {
           ></Loading>
         </div>
       )}
+      <div
+        className="bttBtn"
+        onClick={() => {
+          history.goBack();
+        }}
+      >
+        返回上级
+      </div>
     </div>
   );
 };

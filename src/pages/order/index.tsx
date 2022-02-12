@@ -20,14 +20,17 @@ const Order: FC = () => {
     },
   ];
   const [page, setPage] = useState(commonEnums.PAGE);
-  const [type, setType] = useState(0);
+  const [type, setType] = useState<number>(
+    //@ts-ignore
+    localStorage.getItem('page') ? localStorage.getItem('page') - 1 : 0,
+  );
   const [orders, setOrders] = useState<IOrderItem[]>([]);
   const [showLoading, setShowLoading] = useState(true);
 
   const fetchOrder = async (pageNum: number) => {
     //@ts-ignore
     const { data } = await Http({
-      url: '/order/list',
+      url: '/orders/lists',
       data: {
         ...page,
         type,
@@ -44,14 +47,14 @@ const Order: FC = () => {
       if (entries[0].isIntersecting) {
         //@ts-ignore
         const { data } = await Http({
-          url: '/order/list',
+          url: '/orders/lists',
           data: {
             ...page,
             type,
             pageNum: page.pageNum + 1,
           },
         });
-        if (!isEmpty(data) && !isEmpty(orders) && data.length === page.limit) {
+        if (!isEmpty(data) && !isEmpty(orders) && data.length <= page.limit) {
           setOrders([...orders, ...data]);
           setPage({
             ...page,
@@ -79,7 +82,7 @@ const Order: FC = () => {
         onChange={(val) => {
           const { sub } = val;
           window.localStorage.setItem('page', sub);
-          setType(sub);
+          setType(sub - 1);
           setPage(commonEnums.PAGE);
           setOrders([]);
           setShowLoading(true);

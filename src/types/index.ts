@@ -21,6 +21,7 @@ interface ICitysData {
 }
 
 interface IHouse {
+  name: string;
   id: number;
   imgs: {
     id: number;
@@ -54,19 +55,21 @@ interface IQueryData {
 }
 
 interface IHouseInfo {
-  title: string;
-  msg: string;
+  name: string;
+  info: string;
   price: string;
   publishTime: number;
   startTime: number;
   endTime: number;
 }
 interface ICommentItem {
+  user: {
+    avatar: string;
+    username: string;
+  };
   id: number;
-  avatar: string;
-  username: string;
   createTime: number;
-  info: string;
+  msg: string;
 }
 
 interface IOrderItem {

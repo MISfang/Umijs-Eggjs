@@ -5,11 +5,13 @@ import { createForm } from 'rc-form';
 import { useStoreHook } from 'think-react-store';
 const index = (props) => {
   const { getFieldProps, validateFields } = props.form;
+
   const {
     user: { editUserAsync, getUserAsync, avatar, phone, sign },
   } = useStoreHook();
 
   const [files, setFiles] = useState([{ url: avatar }]);
+
   const handleSubmit = () => {
     if (!files.length) {
       Toast.fail('请先上传文件');
@@ -20,10 +22,16 @@ const index = (props) => {
         Toast.fail(`请填写电话`);
         return;
       }
+      const regtest = /^(?:(?:\+|00)86)?1\d{10}$/;
+      if (!regtest.test(value.tel)) {
+        Toast.fail(`请填写正确的电话格式`);
+        return;
+      }
       if (value.sign === '') {
         Toast.fail(`请填写用户签名`);
         return;
       }
+
       editUserAsync({
         avatar: files[0].url,
         phone: value.tel,
@@ -46,7 +54,7 @@ const index = (props) => {
               onChange={(files) => {
                 const size = files[0]?.file?.size / 1024 / 1024;
                 if (size > 0.5) {
-                  Toast.fail(`图片大于${size}M禁止上传`);
+                  Toast.fail(`图片大于${size}M 禁止上传`);
                 } else {
                   setFiles(files);
                 }

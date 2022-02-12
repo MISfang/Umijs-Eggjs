@@ -3,6 +3,18 @@ import { Http } from '@/helper/utils';
 import { IHouseInfo } from '@/types';
 import { Toast } from 'antd-mobile';
 
+const handleOrder = async (url: string, dispatch: Function, payload: any) => {
+  //@ts-ignore
+  const { data } = await Http({
+    url,
+    data: payload,
+  });
+  dispatch({
+    type: 'setOrder',
+    payload: data,
+  });
+};
+
 export default {
   state: {
     detail: {},
@@ -10,6 +22,7 @@ export default {
     page: commonEnums.PAGE,
     showLoading: true,
     reloadCommentsNum: 0,
+    order: null,
   },
   reducers: {
     getDetail(state: any, payload: IHouseInfo) {
@@ -51,6 +64,12 @@ export default {
         ...payload,
       };
     },
+    setOrder(state: any, payload: any) {
+      return {
+        ...state,
+        order: payload,
+      };
+    },
   },
 
   effects: {
@@ -60,6 +79,7 @@ export default {
         url: '/house/detail',
         data: payload,
       });
+
       dispatch({
         type: 'getDetail',
         payload: data,
@@ -72,27 +92,28 @@ export default {
         url: '/comment/lists',
         data: {
           ...payload,
-          pageSize: page.pageSize,
+          pageSize: page.limit,
           pageNum: page.pageNum,
         },
       });
       dispatch({
         type: 'getComments',
-        payload: [...comments, ...data.lists],
+        payload: [...comments, ...data],
       });
       dispatch({
         type: 'setShowLoading',
-        payload: data.lists.length ? true : false,
+        payload: data.length ? true : false,
       });
     },
 
     async addCommentAsync(dispatch: Function, rootState: any, payload: any) {
       //@ts-ignore
-      const { data } = await Http({
-        url: '/comments/add',
+      const { status } = await Http({
+        url: '/comment/add',
         data: payload,
       });
-      if (data === 'OK') {
+
+      if (status === 200) {
         dispatch({
           type: 'reSetData',
           payload: {},
@@ -101,6 +122,18 @@ export default {
       } else {
         Toast.offline('发生错误，请稍后再试！');
       }
+    },
+
+    async hasOrderAsync(dispatch: Function, rootState: any, payload: any) {
+      handleOrder('/orders/hasOrder', dispatch, payload);
+    },
+    async addOrderAsync(dispatch: Function, rootState: any, payload: any) {
+      handleOrder('/orders/addOrder', dispatch, payload);
+      Toast.success('预定民宿成功');
+    },
+    async delOrderAsync(dispatch: Function, rootState: any, payload: any) {
+      handleOrder('/orders/delOrder', dispatch, payload);
+      Toast.success('取消预定成功');
     },
   },
 };

@@ -20,7 +20,9 @@ const index: FC<{
         marginBottom={60}
         marginTop={-10}
         id={commonEnums.LOADING_ID}
-      ></Loading>
+      >
+        没有订单
+      </Loading>
     </div>
   );
 };

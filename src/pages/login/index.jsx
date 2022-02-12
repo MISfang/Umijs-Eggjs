@@ -2,6 +2,7 @@ import { List, InputItem, Button, Toast } from 'antd-mobile';
 import './index.less';
 import { createForm } from 'rc-form';
 import { useStoreHook } from 'think-react-store';
+import { history } from 'umi';
 
 const index = (props) => {
   const { getFieldProps, validateFields } = props.form;
@@ -24,6 +25,8 @@ const index = (props) => {
         username,
         password,
       });
+
+      history.push('/');
     });
   };
   return (

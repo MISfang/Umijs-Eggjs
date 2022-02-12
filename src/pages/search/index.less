@@ -2,7 +2,7 @@
 
 .swiper-button-prev,
 .swiper-button-next {
-  width : 27px !important;
+  width: 27px !important;
   height: 28px !important;
 }
 
@@ -10,45 +10,51 @@
   background-color: blueviolet !important;
 }
 
+.serachBar {
+  box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px,
+    rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px,
+    rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
 .search-page {
-
-
   .am-search {
     position: fixed;
-    width   : 100%;
-    left    : 0;
-    top     : 0;
+    width: 100%;
+    left: 0;
+    top: 0;
   }
 
   .result {
-    width     : 100%;
+    width: 100%;
     margin-top: 40px;
-    padding   : 10px;
+    padding: 10px;
     box-sizing: border-box;
 
     .item {
       .flex(row, flex-start);
-      height       : 100px;
-      padding      : 6px;
-      background   : #fff;
+      height: 100px;
+      padding: 6px;
+      background: #fff;
       margin-bottom: 12px;
       border-radius: 10px;
-      box-shadow   : rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
-
+      box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px,
+        rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
+        rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
 
       img {
-        width     : 120px;
-        height    : 86px;
+        width: 120px;
+        height: 86px;
         object-fit: cover;
+        border-radius: 5px;
       }
 
       &-right {
         .flex(column, space-between);
-        flex       : 1;
-        height     : 90px;
+        flex: 1;
+        height: 90px;
         margin-left: 16px;
 
         .title,
+        .title2,
         .price {
           width: 100%;
         }
@@ -56,12 +62,30 @@
         .title {
           font-size: 20px;
         }
+        .title2 {
+          font-size: 14px;
+          color: rgb(73, 73, 73);
+          font-weight: 400;
+        }
 
         .price {
-          color    : #ff4d6a;
+          color: #ff4d6a;
           font-size: 16px;
         }
       }
     }
+  }
+  .bttBtn {
+    width: 80px;
+    height: 40px;
+    border-radius: 20px;
+    line-height: 40px;
+    text-align: center;
+    position: fixed;
+    right: 5px;
+    bottom: 0px;
+    background-color: hsl(271, 46%, 53%);
+    z-index: 100;
+    color: white;
   }
 }

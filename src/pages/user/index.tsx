@@ -1,8 +1,10 @@
-import { List, Button } from 'antd-mobile';
+import { List, Button, Modal } from 'antd-mobile';
 import { FC, useState, useEffect } from 'react';
 import { history } from 'umi';
 import './index.less';
 import { useStoreHook } from 'think-react-store';
+const alert = Modal.alert;
+
 const User: FC = () => {
   const {
     user: { username, avatar, sign, phone, getUserAsync, logoutAsync },
@@ -47,7 +49,16 @@ const User: FC = () => {
         </List>
       </div>
 
-      <Button type="warning" onClick={logoutAsync}>
+      <Button
+        type="warning"
+        className="mybtn"
+        onClick={() =>
+          alert('确定退出登录?', 'Are you sure???', [
+            { text: '取消', onPress: () => console.log('cancel') },
+            { text: '确定', onPress: () => logoutAsync() },
+          ])
+        }
+      >
         退出登录
       </Button>
     </div>

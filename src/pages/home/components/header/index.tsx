@@ -13,7 +13,10 @@ const index: FC = () => {
         leftContent="民宿页面"
         rightContent={
           username ? (
-            <div className="username">{username}</div>
+            <div className="username">
+              欢迎你！
+              {username}
+            </div>
           ) : (
             [
               <Link key={1} to="/login" className="mybtn">

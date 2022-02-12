@@ -2,8 +2,12 @@ import { FC, useState, useEffect } from 'react';
 import { Modal, Button, TextareaItem, Toast } from 'antd-mobile';
 import './index.less';
 import { useStoreHook } from 'think-react-store';
+import { useLocation } from 'umi';
+import handleQuery from '@/helper/query';
 
 const index: FC = () => {
+  const { id } = handleQuery(useLocation().search);
+
   const [modalIsSHow, setModalIsSHow] = useState<boolean>(false);
   const [text, setText] = useState('');
   const {
@@ -13,6 +17,7 @@ const index: FC = () => {
     if (text) {
       addCommentAsync({
         comment: text,
+        houseId: id,
       });
       setModalIsSHow(false);
       setText('');

@@ -3,6 +3,8 @@ import './index.less';
 import { createForm } from 'rc-form';
 import { useStoreHook } from 'think-react-store';
 import { useState } from 'react';
+import { history } from 'umi';
+
 const index = (props) => {
   const { getFieldProps, validateFields } = props.form;
   const {
@@ -34,6 +36,8 @@ const index = (props) => {
         username,
         password,
       });
+
+      history.push('/');
     });
   };
   return (
@@ -64,7 +68,7 @@ const index = (props) => {
           </InputItem>
         </List>
         <Button type="primary" className="btn" onClick={handleSubmit}>
-          登录
+          注册
         </Button>
         <a href="/login" className="register">
           已有账户,前往登录~

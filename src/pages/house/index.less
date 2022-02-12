@@ -1,7 +1,7 @@
 @import '../../helper/mixin.less';
 
 .banner_info {
-  width : 100%;
+  width: 100%;
   height: 200px;
 }
 
@@ -16,23 +16,23 @@
   }
 
   .info {
-    margin         : 12px;
-    padding        : 12px;
-    background     : #fff;
-    display        : flex;
-    flex-direction : column;
-    gap            : 10px;
+    margin: 12px;
+    padding: 12px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     justify-content: center;
-    box-shadow     : rgba(0, 0, 0, 0.25) 0px 5px 15px 0px;
-    border-radius  : 20px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 15px 0px;
+    border-radius: 20px;
 
     &-btn {
-      width     : 50vw;
+      width: 50vw;
       align-self: center;
     }
 
     &-title {
-      font-size  : 20px;
+      font-size: 20px;
       font-weight: 500;
     }
 
@@ -42,22 +42,19 @@
   }
 
   .comment {
-
-
     .line {
-      width           : 90%;
-      height          : 2px;
-      background-color: blueviolet;
-      margin          : 20px auto 10px;
+      width: 94%;
+      height: 3px;
+      background-color: hsl(271, 50%, 53%);
+      margin: 30px auto 20px;
     }
 
     &-title {
-      font-size  : 20px;
+      font-size: 20px;
       line-height: 20px;
       margin-left: 12px;
-      margin-top : 20px;
+      margin-top: 20px;
     }
-
 
     &-lists {
       margin: 12px 12px 60px 12px;
@@ -65,20 +62,21 @@
       &_item {
         .flex(row, flex-start, flex-start);
         border-radius: 12px;
-        box-shadow   : rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
-        padding      : 12px;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+        padding: 12px;
         border-bottom: 1px solid rgba(0, 0, 0, 0.08);
         margin-bottom: 6px;
-        background   : #fff;
+        background: #fff;
 
         img {
-          width        : 50px;
-          height       : 50px;
+          width: 50px;
+          height: 50px;
           border-radius: 50%;
+          box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
         }
 
         .right {
-          flex        : 1;
+          flex: 1;
           padding-left: 16px;
 
           &-top {
@@ -86,13 +84,13 @@
 
             span {
               font-size: 12px;
-              color    : rgb(151, 151, 151);
+              color: rgb(151, 151, 151);
             }
           }
 
           &-bottom {
-            color    : rgba(0, 0, 0, 0.4);
-            font-size: 14px;
+            color: rgba(0, 0, 0, 0.8);
+            font-size: 18px;
           }
         }
       }
@@ -101,20 +99,34 @@
 
   .footer {
     .flex(row, flex-start, center);
-    box-shadow   : rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
-    position     : fixed;
-    bottom       : 0;
-    left         : 5px;
-    right        : 5px;
-    background   : #fff;
-    height       : 40px;
-    padding      : 10px;
-    border       : 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
+      rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
+      rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+    position: fixed;
+    bottom: 0;
+    left: 5px;
+    right: 5px;
+    background: #fff;
+    height: 40px;
+    padding: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: 20px;
-    color        : rgba(0, 0, 0, 0.4);
+    color: rgba(0, 0, 0, 0.4);
   }
 
-
+  .bttBtn {
+    width: 80px;
+    height: 40px;
+    border-radius: 20px;
+    line-height: 40px;
+    text-align: center;
+    position: fixed;
+    right: 5px;
+    bottom: 0px;
+    background-color: hsl(271, 46%, 53%);
+    z-index: 100;
+    color: white;
+  }
 }
 
 .modal-comment {
@@ -122,7 +134,7 @@
 
   .am-textarea-item {
     margin-top: 25px;
-    border    : 1px solid rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.08);
   }
 
   .comment-btn {
