@@ -30,6 +30,14 @@ class OrdersService extends BaseService {
   }
 
   async lists({ type, userId, limit, pageNum }) {
+    console.log(
+      '%c 🥡 type, userId, limit, pageNum: ',
+      'font-size:20px;background-color: #EA7E5C;color:#fff;',
+      type,
+      userId,
+      limit,
+      pageNum,
+    );
     return this.run(async (ctx, app) => {
       return await ctx.model.Orders.findAll({
         where: {

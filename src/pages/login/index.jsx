@@ -25,8 +25,11 @@ const index = (props) => {
         username,
         password,
       });
-
-      history.push('/');
+      if (localStorage.getItem('token')) {
+        history.push('/');
+      } else {
+        Toast.fail('该用户不存在');
+      }
     });
   };
   return (

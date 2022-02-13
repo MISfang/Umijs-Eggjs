@@ -45,7 +45,7 @@ module.exports = (appInfo) => {
   };
   config.interfaceCache = {
     expire: 10,
-    // include: ['/api/user/detail'],
+    include: ['/api/user/detail'],
   };
 
   config.redis = {
