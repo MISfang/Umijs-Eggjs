@@ -1,11 +1,11 @@
 const Service = require('egg').Service;
 
 class BaseService extends Service {
-  run(callback) {
+  run(myFun) {
     const { ctx, app } = this;
     try {
-      if (callback) {
-        return callback(ctx, app);
+      if (myFun) {
+        return myFun(ctx, app);
       }
     } catch (error) {
       console.log(

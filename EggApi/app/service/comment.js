@@ -3,8 +3,7 @@ const BaseService = require('./base');
 class CommentService extends BaseService {
   async add(params) {
     return this.run(async (ctx, app) => {
-      const res = await ctx.model.Comment.create(params);
-      return res;
+      return await ctx.model.Comment.create(params);
     });
   }
 
