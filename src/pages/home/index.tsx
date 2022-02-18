@@ -17,7 +17,7 @@ const Home: FC = () => {
 
   return (
     <div className="home">
-      {citysLoading && housesLoading ? (
+      {citysLoading || housesLoading ? (
         <Loading isBig={true} marginTop={100}></Loading>
       ) : (
         <>
