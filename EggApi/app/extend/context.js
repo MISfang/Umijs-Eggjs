@@ -8,6 +8,7 @@ module.exports = {
       : undefined;
     return tokenCache ? tokenCache.username : undefined;
   },
+
   params(key) {
     const method = this.request.method;
     if (method === 'GET') {

@@ -16,9 +16,15 @@ const Order: FC = ({ children }) => {
   if (timeIsDark) {
     localStorage.setItem('isDark', true.toString());
   }
+  if (!timeIsDark) {
+    localStorage.setItem('isDark', false.toString());
+  }
   useEffect(() => {
     if (timeIsDark) {
       Toast.success('夜深了，自动为您保护眼睛', 1);
+    }
+    if (!timeIsDark) {
+      Toast.success('天亮了，已为您切换成白天模式', 1);
     }
   }, []);
 
