@@ -78,7 +78,7 @@ class UserController extends BaseController {
         ...this.parseResult(ctx, res),
       });
     } else {
-      this.error('该用户不存在');
+      this.error('用户名或者密码错误！');
     }
   }
 
