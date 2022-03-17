@@ -76,7 +76,7 @@ module.exports = (appInfo) => {
   const userConfig = {
     // myAppName: 'egg',
     salt: 'Fang',
-    redisExpire: 60 * 60 * 24,
+    redisExpire: 60 * 60 * 1,
   };
 
   return {

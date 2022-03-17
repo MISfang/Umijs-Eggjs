@@ -5,7 +5,7 @@
  */
 module.exports = (app) => {
   const { router, controller } = app;
-  const { get, post } = router;
+  const { post } = router;
   const userExits = app.middleware.userExits();
   post('/api/user/register', controller.user.register);
   post('/api/user/login', controller.user.login);
