@@ -24,6 +24,7 @@ export default {
     reloadCommentsNum: 0,
     order: null,
   },
+
   reducers: {
     getDetail(state: any, payload: IHouseInfo) {
       return {

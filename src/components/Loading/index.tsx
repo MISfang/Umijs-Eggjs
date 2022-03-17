@@ -1,15 +1,8 @@
 import { FC } from 'react';
 import './index.less';
 import './nodata.less';
-
-const Loading: FC<{
-  id?: string;
-  showLoading?: boolean;
-  isBig?: boolean;
-  marginBottom?: number;
-  marginTop?: number;
-  isPinglun?: boolean;
-}> = ({
+import { ILoadingProps } from '@/types';
+const Loading: FC<ILoadingProps> = ({
   id,
   showLoading = true,
   isBig,

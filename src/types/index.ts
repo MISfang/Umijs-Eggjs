@@ -80,6 +80,15 @@ interface IOrderItem {
   price: string;
 }
 
+interface ILoadingProps {
+  id?: string;
+  showLoading?: boolean;
+  isBig?: boolean;
+  marginBottom?: number;
+  marginTop?: number;
+  isPinglun?: boolean;
+}
+
 export {
   IMenuBarProps,
   IHouseData,
@@ -91,4 +100,5 @@ export {
   IHouseInfo,
   ICommentItem,
   IOrderItem,
+  ILoadingProps,
 };
