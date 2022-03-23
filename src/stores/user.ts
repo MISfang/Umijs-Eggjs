@@ -1,6 +1,5 @@
 import { Http } from '@/helper/utils';
 import { Toast } from 'antd-mobile';
-import { urlGet } from 'project-libs';
 import { history } from 'umi';
 
 export default {
@@ -60,15 +59,16 @@ export default {
         data: payload,
       });
       console.log(
-        '%c 🍗 data: ',
-        'font-size:20px;background-color: #93C0A4;color:#fff;',
-        data,
+        '%c 🍹 history.location.search: ',
+        'font-size:20px;background-color: #42b983;color:#fff;',
+        history.location.search,
       );
       if (data) {
+        const { token, username } = data;
         Toast.success('登录成功');
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('username', data.username);
-        urlGet('from') && history.push(urlGet('from')!);
+        localStorage.setItem('token', token);
+        localStorage.setItem('username', username);
+        history.push(`/${history.location.search.slice(5)}`);
       }
     },
     async registerAsync(dispatch: Function, rootState: any, payload: any) {
@@ -79,10 +79,11 @@ export default {
       });
 
       if (data) {
+        const { token, username } = data;
         Toast.success('注册成功');
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('username', data.username);
-        urlGet('from') && history.push(urlGet('from')!);
+        localStorage.setItem('token', token);
+        localStorage.setItem('username', username);
+        history.push(`/${history.location.search.slice(5)}`);
       }
     },
     async logoutAsync(dispatch: Function, rootState: any, payload: any) {

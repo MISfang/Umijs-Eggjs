@@ -1,5 +1,6 @@
 import { cookie } from 'project-libs';
 import { history } from 'umi';
+
 export function onRouteChange(route: any) {
   const nowPath = route.routes[0].routes.filter(
     (item: any) => item.path === route.location.pathname,
@@ -10,7 +11,7 @@ export function onRouteChange(route: any) {
     history.push({
       pathname: '/login',
       query: {
-        from: route.location.pathname,
+        from: route.location.pathname.slice(1),
       },
     });
   }

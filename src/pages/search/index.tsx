@@ -105,6 +105,7 @@ const index: FC = () => {
                   pathname: '/house',
                   query: { id: id.toString() },
                 });
+                location.search;
               }}
             >
               <img
