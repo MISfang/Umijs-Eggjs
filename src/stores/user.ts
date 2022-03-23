@@ -58,11 +58,7 @@ export default {
         url: '/user/login',
         data: payload,
       });
-      console.log(
-        '%c 🍹 history.location.search: ',
-        'font-size:20px;background-color: #42b983;color:#fff;',
-        history.location.search,
-      );
+
       if (data) {
         const { token, username } = data;
         Toast.success('登录成功');
@@ -94,7 +90,12 @@ export default {
 
       Toast.success('退出登录成功！');
       localStorage.clear();
-      location.href = `/login?from=${location.pathname}`;
+      history.push({
+        pathname: '/login',
+        query: {
+          from: location.pathname.slice(1),
+        },
+      });
     },
   },
 };
