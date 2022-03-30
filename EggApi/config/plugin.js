@@ -27,6 +27,12 @@ module.exports = {
     enable: true,
     package: 'egg-redis',
   },
+  // 自动生成swagger接口文档
+  swaggerEgg: {
+    enable: true,
+    package: 'swagger-egg',
+  },
+  // 接口缓存
   interfaceCache: {
     enable: true,
     path: path.join(__dirname, '../lib/plugin/egg-interfaceCache'),

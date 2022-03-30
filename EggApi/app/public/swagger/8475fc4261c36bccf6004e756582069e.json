@@ -1,0 +1,214 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "学习开发egg全栈旅游小app",
+    "description": "前端umijs+dva+react-router+antd-design-mobile\n后端eggjs+jwt+mysql+redis",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "登录注册",
+      "description": "用户 登录/注册/退出登录/修改信息 接口"
+    }
+  ],
+  "definitions": {},
+  "paths": {
+    "/api/user/register": {
+      "post": {
+        "description": "注册用户",
+        "operationId": "user/register",
+        "parameters": [
+          {
+            "name": "registerInfo",
+            "required": true,
+            "description": "注册用户信息",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": { "type": "string" },
+                "password": { "type": "string" }
+              },
+              "required": ["username", "password"],
+              "additionalProperties": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "接口返回示例",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": { "type": "number" },
+                "data": {
+                  "properties": {
+                    "id": { "type": "number" },
+                    "username": { "type": "string" },
+                    "createTime": { "type": "number", "defaultValue": 123456 },
+                    "token": { "type": "string" }
+                  }
+                },
+                "Msg": { "type": "string" }
+              }
+            }
+          }
+        },
+        "tags": ["登录注册"],
+        "consumes": ["application/json"],
+        "produces": ["application/json"]
+      }
+    },
+    "/api/user/login": {
+      "post": {
+        "description": "用户登录",
+        "operationId": "user/login",
+        "parameters": [
+          {
+            "name": "loginInfo",
+            "required": true,
+            "description": "用户登录信息",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": { "type": "string" },
+                "password": { "type": "string" }
+              },
+              "required": ["username", "password"],
+              "additionalProperties": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "接口返回示例",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": { "type": "number" },
+                "data": {
+                  "properties": {
+                    "id": { "type": "number" },
+                    "username": { "type": "string" },
+                    "avatar": { "type": "string" },
+                    "phone": { "type": "number" },
+                    "sign": { "type": "string" },
+                    "createTime": { "type": "number" },
+                    "updateTime": { "type": "number" },
+                    "token": { "type": "string" }
+                  }
+                },
+                "Msg": { "type": "string" }
+              }
+            }
+          }
+        },
+        "tags": ["登录注册"],
+        "consumes": ["application/json"],
+        "produces": ["application/json"]
+      }
+    },
+    "/api/user/detail": {
+      "post": {
+        "description": "用户详细信息",
+        "operationId": "user/detail",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "接口返回示例",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": { "type": "number" },
+                "data": {
+                  "properties": {
+                    "id": { "type": "number" },
+                    "username": { "type": "string" },
+                    "avatar": { "type": "string" },
+                    "phone": { "type": "number" },
+                    "sign": { "type": "string" },
+                    "createTime": { "type": "number" },
+                    "updateTime": { "type": "number" },
+                    "token": { "type": "string" }
+                  }
+                },
+                "Msg": { "type": "string" }
+              }
+            }
+          }
+        },
+        "tags": ["登录注册"],
+        "consumes": ["application/json"],
+        "produces": ["application/json"]
+      }
+    },
+    "/api/user/logout": {
+      "post": {
+        "description": "退出登录",
+        "operationId": "user/logout",
+        "parameters": [],
+        "responses": { "200": { "description": "接口返回示例" } },
+        "tags": ["登录注册"],
+        "consumes": ["application/json"],
+        "produces": ["application/json"]
+      }
+    },
+    "/api/user/edit": {
+      "post": {
+        "description": "修改信息",
+        "operationId": "user/edit",
+        "parameters": [
+          {
+            "name": "detailInfo",
+            "required": true,
+            "description": "修改信息参数",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "avatar": { "type": "string" },
+                "phone": { "type": "string" },
+                "sign": { "type": "string" }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "接口返回示例",
+            "schema": {
+              "type": "object",
+              "properties": { "status": { "type": "number" } }
+            }
+          }
+        },
+        "tags": ["登录注册"],
+        "consumes": ["application/json"],
+        "produces": ["application/json"]
+      }
+    }
+  },
+  "host": "127.0.0.1:7001",
+  "schemes": ["http", "https"],
+  "basePath": "/",
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "securityDefinitions": {
+    "api_key": { "type": "apiKey", "name": "Authorization", "in": "header" },
+    "github_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "http://swagger.io/api/oauth/dialog",
+      "flow": "implicit",
+      "scopes": {
+        "write:homes": "modify home info",
+        "read:homes": "read home info"
+      }
+    }
+  },
+  "security": [{ "api_key": [] }],
+  "externalDocs": {
+    "url": "https://coding.imooc.com/class/452.html",
+    "description": "这个是原课程链接"
+  }
+}

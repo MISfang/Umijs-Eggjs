@@ -72,6 +72,56 @@ module.exports = (appInfo) => {
   config.jwt = {
     secret: 'Fang',
   };
+
+  // 尝试使用swagger自动生成工具
+  config.swaggerEgg = {
+    schema: {
+      path: '/app/schema', // JSON Schema directory
+    },
+    swagger: {
+      info: {
+        title: '学习开发egg全栈旅游小app',
+        description:
+          '前端umijs+dva+react-router+antd-design-mobile\n后端eggjs+jwt+mysql+redis',
+        version: '1.0.0',
+      },
+      externalDocs: {
+        url: 'https://coding.imooc.com/class/452.html',
+        description: '这个是原课程链接',
+      },
+      host: '127.0.0.1:7001', // catution: 'localhost:7001' will result in cross origin error
+      schemes: ['http', 'https'],
+      consumes: ['application/json'],
+      produces: ['application/json'],
+      tags: [
+        {
+          name: '登录注册',
+          description: '用户 登录/注册/退出登录/修改信息 接口',
+        },
+      ],
+      securityDefinitions: {
+        api_key: {
+          type: 'apiKey', // basic/apiKey/oauth2
+          name: 'Authorization', // selfdefined parameter, usually use 'Authorization'
+          in: 'header', // query or header, usually use 'header'
+        },
+        github_auth: {
+          type: 'oauth2',
+          authorizationUrl: 'http://swagger.io/api/oauth/dialog',
+          flow: 'implicit',
+          scopes: {
+            'write:homes': 'modify home info',
+            'read:homes': 'read home info',
+          },
+        },
+      },
+      security: [
+        {
+          api_key: [], // use api key to security
+        },
+      ], // Cacution: security is array type
+    },
+  };
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',

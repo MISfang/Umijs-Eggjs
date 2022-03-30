@@ -20,6 +20,16 @@ class UserController extends BaseController {
   }
   // 辅助方法结束
 
+  /**
+   * 注册用户 #swagger-api
+   * @function register
+   * @memberof UserController
+   * @description #tags 登录注册
+   * @description #consumes application/json
+   * @description #produces application/json
+   * @description #parameters registerInfo body schema.user.registerInfo true - 注册用户信息
+   * @description #responses 200 schema.user.registerData - 接口返回示例
+   */
   async register() {
     const { ctx, app } = this;
     const { username, password } = ctx.params();
@@ -50,6 +60,16 @@ class UserController extends BaseController {
     }
   }
 
+  /**
+   * 用户登录 #swagger-api
+   * @function login
+   * @memberof UserController
+   * @description #tags 登录注册
+   * @description #consumes application/json
+   * @description #produces application/json
+   * @description #parameters loginInfo body schema.user.loginInfo true - 用户登录信息
+   * @description #responses 200 schema.user.loginData - 接口返回示例
+   */
   async login() {
     const { ctx } = this;
     const { username, password } = ctx.params();
@@ -69,6 +89,15 @@ class UserController extends BaseController {
     }
   }
 
+  /**
+   * 用户详细信息 #swagger-api
+   * @function detail
+   * @memberof UserController
+   * @description #tags 登录注册
+   * @description #consumes application/json
+   * @description #produces application/json
+   * @description #responses 200 schema.user.loginData - 接口返回示例
+   */
   async detail() {
     const { ctx } = this;
     const res = await ctx.service.user.getUser(ctx.username);
@@ -82,6 +111,15 @@ class UserController extends BaseController {
     }
   }
 
+  /**
+   * 退出登录 #swagger-api
+   * @function logout
+   * @memberof UserController
+   * @description #tags 登录注册
+   * @description #consumes application/json
+   * @description #produces application/json
+   * @description #responses 200 schema.user.logoutInfo - 接口返回示例
+   */
   async logout() {
     const { ctx, app } = this;
     try {
@@ -92,6 +130,16 @@ class UserController extends BaseController {
     }
   }
 
+  /**
+   * 修改信息 #swagger-api
+   * @function edit
+   * @memberof UserController
+   * @description #tags 登录注册
+   * @description #consumes application/json
+   * @description #produces application/json
+   * @description #parameters detailInfo body schema.user.detailInfo true - 修改信息参数
+   * @description #responses 200 schema.user.detailData - 接口返回示例
+   */
   async edit() {
     const { ctx } = this;
     const res = ctx.service.user.edit({
