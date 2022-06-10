@@ -1,12 +1,12 @@
 import handleQuery from '@/helper/query';
+import { commonEnums } from '@/enums';
 import { FC, useEffect, useState } from 'react';
+import { history, useLocation } from 'umi';
+import { Icon, NavBar, SearchBar } from 'antd-mobile';
 import { IHouse } from '@/types';
 import { Loading } from '@/components';
-import { SearchBar, NavBar, Icon } from 'antd-mobile';
 import { useHttpHook, useImageHook, useObserverHook } from '@/hooks';
-import { history, useLocation } from 'umi';
 import './index.less';
-import { commonEnums } from '@/enums';
 
 const index: FC = () => {
   const { cityID, startTime, endTime } = handleQuery(useLocation().search);

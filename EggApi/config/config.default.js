@@ -63,7 +63,7 @@ module.exports = (appInfo) => {
     port: '3306',
     user: 'root',
     password: 'understandme520',
-    database: 'egg_ts',
+    database: 'react_egg',
     define: {
       timestamps: false,
       freezeTableName: true,
@@ -122,6 +122,7 @@ module.exports = (appInfo) => {
       ], // Cacution: security is array type
     },
   };
+
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',

@@ -11,6 +11,7 @@ import { Toast } from 'antd-mobile';
 const Order: FC = ({ children }) => {
   const location = useLocation();
   const paths = ['/', '/order', '/user'];
+
   const time = new Date().getHours();
   const timeIsDark = time >= 20 || time <= 6 ? true : false;
   if (timeIsDark) {
