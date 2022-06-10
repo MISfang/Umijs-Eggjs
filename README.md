@@ -7,6 +7,7 @@
 ### 前端
 
 - react + react Hooks
+- TypeScript 做静态类型检查
 - UmiJs3 [](https://umijs.org/zh-CN)
 - Redex + react-router
 - antd-design-mobile UI[框架](https://mobile.ant.design/zh)
